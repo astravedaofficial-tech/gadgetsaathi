@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GadgetSaathi — Tech Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "GadgetSaathi",
+  "description": "Electronics gadgets ke reviews, comparisons aur best-buy guides.",
+  "inLanguage": "hi-IN"
+}
+</script>
+
+<style>
+  :root{
+    --bg: #05060A;
+    --bg-2: #0A0C14;
+    --panel: #0D0F1A;
+    --line: #1E2333;
+    --line-bright: #2C3350;
+    --text: #E8ECF7;
+    --text-dim: #7C85A3;
+    --cyan: #4FF0E8;
+    --violet: #A78BFA;
+    --mono: 'JetBrains Mono',monospace;
+    box-sizing:border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-padding-top: env(safe-area-inset-top, 0px); scroll-behavior:smooth;}
+  html,body{margin:0;}
+  body{
+    background:var(--bg); color:var(--text); font-family:'Inter',sans-serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  h1,h2,h3,.brand{font-family:'Space Grotesk',sans-serif;}
+  .mono{font-family:var(--mono);}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1100px; margin:0 auto; padding:0 22px;}
+  ::selection{background:var(--cyan); color:#031414;}
+
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.35;}}
+  @keyframes drift{0%{background-position:0% 0%;}100%{background-position:100% 100%;}}
+  @keyframes scan{0%{transform:translateY(-100%);}100%{transform:translateY(100%);}}
+
+  body::before{
+    content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(700px 500px at 15% -5%, rgba(79,240,232,0.09), transparent 60%),
+      radial-gradient(600px 460px at 100% 20%, rgba(167,139,250,0.10), transparent 60%),
+      radial-gradient(500px 400px at 50% 100%, rgba(79,240,232,0.05), transparent 60%);
+  }
+
+  header{
+    position:sticky; top:0; z-index:30;
+    background:rgba(5,6,10,0.85); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:16px 22px; max-width:1100px; margin:0 auto;}
+  .brand{font-size:19px; font-weight:700; display:flex; align-items:center; gap:9px; letter-spacing:-0.01em;}
+  .brand .led{width:8px; height:8px; border-radius:50%; background:var(--cyan); box-shadow:0 0 10px var(--cyan); animation:pulse 2s infinite;}
+  .status{font-family:var(--mono); font-size:11px; color:var(--text-dim); display:none; align-items:center; gap:6px;}
+  @media(min-width:640px){ .status{display:flex;} }
+  .status .dot{width:6px;height:6px;border-radius:50%;background:#4ADE80;}
+
+  /* hero */
+  .hero{position:relative; padding:60px 0 50px; border-bottom:1px solid var(--line); overflow:hidden;}
+  .hero-tag{font-family:var(--mono); font-size:12px; color:var(--cyan); letter-spacing:0.05em; margin-bottom:18px; display:flex; align-items:center; gap:8px;}
+  .hero-tag::before{content:'▸';}
+  .hero h1{font-size:clamp(32px,6vw,52px); line-height:1.06; font-weight:700; letter-spacing:-0.02em; max-width:15ch; margin:0 0 20px;}
+  .hero h1 span{background:linear-gradient(90deg,var(--cyan),var(--violet)); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .hero p{color:var(--text-dim); font-size:16.5px; max-width:44ch; margin:0 0 30px;}
+  .btn{display:inline-flex; align-items:center; gap:8px; padding:13px 22px; border-radius:8px; font-weight:600; font-size:14px; font-family:var(--mono);}
+  .btn-fill{background:linear-gradient(90deg,var(--cyan),var(--violet)); color:#04121A; box-shadow:0 0 30px -8px rgba(79,240,232,0.5);}
+  .btn-line{border:1px solid var(--line-bright); color:var(--text);}
+  .cta-row{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:36px;}
+  .metric-row{display:flex; gap:0; border-top:1px solid var(--line);}
+  .metric{flex:1; padding:16px 0; border-right:1px solid var(--line);}
+  .metric:last-child{border-right:none;}
+  .metric b{display:block; font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:600; color:var(--cyan);}
+  .metric span{font-family:var(--mono); font-size:10.5px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.04em;}
+
+  section{position:relative; z-index:1; padding:52px 0;}
+  .section-head{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:26px; gap:14px;}
+  .section-head .tag{font-family:var(--mono); font-size:11px; color:var(--cyan); text-transform:uppercase; letter-spacing:0.08em; display:block; margin-bottom:6px;}
+  .section-head h2{font-size:clamp(21px,3vw,27px); margin:0; font-weight:600;}
+  .section-head .link{font-family:var(--mono); font-size:11.5px; color:var(--text-dim); white-space:nowrap;}
+
+  /* category grid - HUD style */
+  .cat-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line);}
+  @media(min-width:640px){ .cat-grid{grid-template-columns:repeat(4,1fr);} }
+  .cat-card{background:var(--panel); padding:22px 18px; position:relative;}
+  .cat-card::before,.cat-card::after{content:''; position:absolute; width:10px; height:10px; border:1px solid var(--line-bright); opacity:0.7;}
+  .cat-card::before{top:8px; left:8px; border-right:none; border-bottom:none;}
+  .cat-card::after{bottom:8px; right:8px; border-left:none; border-top:none;}
+  .cat-card svg{width:22px; height:22px; margin-bottom:14px; color:var(--cyan);}
+  .cat-card h3{font-size:15px; margin:0 0 4px; font-weight:600;}
+  .cat-card .c{font-family:var(--mono); color:var(--text-dim); font-size:11px;}
+
+  /* featured product terminal card */
+  .feature{
+    border:1px solid var(--line-bright); border-radius:14px; overflow:hidden;
+    background:linear-gradient(155deg,var(--panel),var(--bg-2));
+    position:relative;
+  }
+  .feature-top{display:flex; align-items:center; justify-content:space-between; padding:12px 18px; border-bottom:1px solid var(--line); font-family:var(--mono); font-size:11px; color:var(--text-dim);}
+  .feature-top .live{color:#4ADE80; display:flex; align-items:center; gap:6px;}
+  .feature-top .live .d{width:6px;height:6px;border-radius:50%;background:#4ADE80; animation:pulse 1.6s infinite;}
+  .feature-grid{display:grid; grid-template-columns:1fr;}
+  @media(min-width:760px){ .feature-grid{grid-template-columns:0.9fr 1.1fr;} }
+  .feature-media{padding:40px; display:flex; align-items:center; justify-content:center; border-bottom:1px solid var(--line); position:relative;}
+  @media(min-width:760px){ .feature-media{border-bottom:none; border-right:1px solid var(--line);} }
+  .feature-media svg{width:55%; max-width:180px; filter:drop-shadow(0 0 24px rgba(79,240,232,0.25));}
+  .feature-body{padding:30px 32px;}
+  .feature-body .kicker{font-family:var(--mono); font-size:11px; color:var(--violet); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px;}
+  .feature-body h3{font-size:clamp(22px,3.2vw,28px); margin:0 0 12px; font-weight:600;}
+  .feature-body p{color:var(--text-dim); font-size:14.5px; margin:0 0 20px; max-width:50ch;}
+  .spec-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-bottom:22px; font-family:var(--mono); font-size:11.5px;}
+  .spec-grid div{border:1px solid var(--line); border-radius:6px; padding:8px 10px; color:var(--text-dim);}
+  .spec-grid b{color:var(--text); display:block; font-size:13px; margin-top:2px;}
+  .price-row{display:flex; align-items:center; gap:14px; margin-bottom:20px; flex-wrap:wrap;}
+  .price-tag{font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:700; color:var(--cyan);}
+
+  /* posts */
+  .post-grid{display:grid; grid-template-columns:1fr; gap:14px;}
+  @media(min-width:700px){ .post-grid{grid-template-columns:repeat(3,1fr);} }
+  .post{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:20px; display:flex; flex-direction:column; gap:10px;}
+  .post .tag{font-family:var(--mono); font-size:10.5px; color:var(--cyan); text-transform:uppercase; letter-spacing:0.06em;}
+  .post h3{font-size:16px; margin:0; font-weight:600; line-height:1.35;}
+  .post p{color:var(--text-dim); font-size:13px; margin:0;}
+  .post .meta{font-family:var(--mono); font-size:10.5px; color:var(--text-dim); border-top:1px solid var(--line); padding-top:10px; margin-top:auto;}
+
+  /* verdict terminal */
+  .terminal{border:1px solid var(--line-bright); border-radius:12px; background:var(--panel); overflow:hidden;}
+  .terminal-bar{display:flex; align-items:center; gap:8px; padding:10px 16px; border-bottom:1px solid var(--line); font-family:var(--mono); font-size:11px; color:var(--text-dim);}
+  .terminal-bar .c{width:9px;height:9px;border-radius:50%;}
+  .terminal-body{padding:22px 24px; font-family:var(--mono); font-size:13.5px; color:var(--text); line-height:1.7;}
+  .terminal-body .prompt{color:var(--cyan);}
+
+  footer{border-top:1px solid var(--line); padding:36px 0; padding-bottom:calc(36px + env(safe-area-inset-bottom, 0px)); position:relative; z-index:1;}
+  .foot-grid{display:flex; flex-direction:column; gap:16px;}
+  @media(min-width:700px){ .foot-grid{flex-direction:row; justify-content:space-between; align-items:flex-start;} }
+  .disclosure{font-family:var(--mono); font-size:11.5px; color:var(--text-dim); max-width:54ch;}
+  .foot-copy{font-family:var(--mono); font-size:11.5px; color:var(--text-dim);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand"><span class="led"></span>Gadget<span style="color:var(--cyan)">Saathi</span></div>
+    <div class="status"><span class="dot"></span>SYSTEM ONLINE</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-tag">SCANNING BEST TECH DEALS</div>
+    <h1>Sahi gadget chuno, <span>data ke saath</span>.</h1>
+    <p>Mobiles, laptops, earbuds aur smartwatches ke real-world reviews aur benchmarks — honest, bias-free, updated weekly.</p>
+    <div class="cta-row">
+      <a href="#latest" class="btn btn-fill">▶ Latest reviews</a>
+      <a href="#index" class="btn btn-line">Browse index</a>
+    </div>
+  </div>
+  <div class="wrap" style="padding:0;">
+    <div class="metric-row">
+      <div class="metric"><b>120+</b><span>Products Tested</span></div>
+      <div class="metric"><b>₹8K–1L</b><span>Budget Range</span></div>
+      <div class="metric"><b>Weekly</b><span>Price Sync</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="index">
+  <div class="wrap">
+    <div class="section-head"><div><span class="tag">/ 01</span><h2>Category Index</h2></div></div>
+    <div class="cat-grid">
+      <div class="cat-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg><h3>Mobiles</h3><div class="c">38 UNITS</div></div>
+      <div class="cat-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="12" rx="1"/><line x1="2" y1="20" x2="22" y2="20"/></svg><h3>Laptops</h3><div class="c">21 UNITS</div></div>
+      <div class="cat-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="17" r="3"/><circle cx="17" cy="17" r="3"/><path d="M7 14V7a5 5 0 0 1 10 0v7"/></svg><h3>Earbuds</h3><div class="c">34 UNITS</div></div>
+      <div class="cat-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="12" height="12" rx="2"/><line x1="9" y1="2" x2="9" y2="6"/><line x1="15" y1="2" x2="15" y2="6"/><line x1="9" y1="18" x2="9" y2="22"/><line x1="15" y1="18" x2="15" y2="22"/></svg><h3>Smartwatches</h3><div class="c">17 UNITS</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head"><div><span class="tag">/ 02</span><h2>Just Launched</h2></div></div>
+    <div class="feature">
+      <div class="feature-top">
+        <span>PRODUCT_ID: B0AB-D9X1F</span>
+        <span class="live"><span class="d"></span>LIVE PRICE</span>
+      </div>
+      <a href="https://link.amazon/B0aBd9X1f" target="_blank" rel="noopener sponsored" style="display:contents; color:inherit;">
+      <div class="feature-grid">
+        <div class="feature-media">
+          <svg viewBox="0 0 120 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="5" width="100" height="150" rx="16" stroke="var(--cyan)" stroke-width="2"/>
+            <rect x="20" y="18" width="80" height="112" rx="4" fill="url(#g1)"/>
+            <circle cx="60" cy="144" r="5" stroke="var(--cyan)" stroke-width="1.5"/>
+            <defs><linearGradient id="g1" x1="20" y1="18" x2="100" y2="130"><stop stop-color="#131826"/><stop offset="1" stop-color="#0A0D16"/></linearGradient></defs>
+          </svg>
+        </div>
+        <div class="feature-body">
+          <div class="kicker">Smartphone · Editor's Pick</div>
+          <h3>iPhone 18 Pro Max</h3>
+          <p>A20 Pro chip, bada battery aur naya camera system — is saal ka sabse bada upgrade, abhi pre-order live.</p>
+          <div class="spec-grid">
+            <div>Chipset<b>A20 Pro (2nm)</b></div>
+            <div>Storage<b>256GB–2TB</b></div>
+          </div>
+          <div class="price-row"><div class="price-tag">₹1,79,900</div></div>
+          <span class="btn btn-fill">▶ View on Amazon</span>
+        </div>
+      </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="latest">
+  <div class="wrap">
+    <div class="section-head">
+      <div><span class="tag">/ 03</span><h2>Latest &amp; Trending</h2></div>
+      <span class="link">VIEW ALL →</span>
+    </div>
+    <div class="post-grid">
+      <div class="post">
+        <div class="tag">Best Value</div>
+        <h3>2026 ke 5 best budget smartphones ₹15,000 ke andar</h3>
+        <p>Camera, battery, performance ka real-usage comparison.</p>
+        <div class="meta">06:00 READ</div>
+      </div>
+      <div class="post">
+        <div class="tag">Comparison</div>
+        <h3>₹2,000 vs ₹5,000 earbuds — fark sunayi deta hai?</h3>
+        <p>Sound quality, ANC, battery life ka honest test.</p>
+        <div class="meta">04:00 READ</div>
+      </div>
+      <div class="post">
+        <div class="tag">Buying Guide</div>
+        <h3>Student ke liye laptop kaise choose karein</h3>
+        <p>RAM, processor aur budget ka jargon-free guide.</p>
+        <div class="meta">05:00 READ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="c" style="background:#FF5F57;"></span><span class="c" style="background:#FEBC2E;"></span><span class="c" style="background:#28C840;"></span>
+        <span style="margin-left:8px;">verdict.log</span>
+      </div>
+      <div class="terminal-body">
+        <span class="prompt">$</span> analyze --budget=12000-15000 --priority=camera<br>
+        <span class="prompt">›</span> Entry-level phones mein bada gap sirf night photography mein hai — baaki performance almost barabar. Poora breakdown "Best Under ₹15,000" review mein.
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div class="disclosure">
+      // AFFILIATE_DISCLOSURE: GadgetSaathi Amazon Associates program ka hissa hai. Links se purchase karne par chhota commission milta hai, aapko extra cost nahi.
+    </div>
+    <div class="foot-copy">© 2026 GadgetSaathi</div>
+  </div>
+</footer>
+
+</body>
+</html>
